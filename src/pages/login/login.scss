@@ -1,0 +1,62 @@
+.login{
+    height: 100vh;
+    background-color:rgb(255, 244, 207);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .card {
+        display: flex;
+        width: 50%;
+        border-radius: 5px;
+        background-color: #fff;
+        min-height:600px;
+
+        .left{
+            flex:1;
+            background: 
+            linear-gradient(rgb(225, 204, 157), rgba(255, 0, 0, 0)),
+             url(https://images.unsplash.com/photo-1591035897819-f4bdf739f446?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)
+             center
+           ;
+            background-size: cover;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            color: #fff;
+
+            h1{
+                font-size: 50px;
+                line-height: 50px;
+            }
+            p{}
+            span{
+                font-size: 14px;
+            }
+            button{
+               
+                width: 50%;
+                color:#FF731D;
+                background-color: #fff;
+              
+                padding: 10px;
+                border: none;
+                font-weight: bold;
+                cursor: pointer;
+             
+            }
+        }
+
+        .right {
+            flex:1
+            h1{}
+            form{
+                input{
+
+                }
+                button{}
+            }
+        }
+    }
+}
