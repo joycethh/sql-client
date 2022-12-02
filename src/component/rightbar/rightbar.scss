@@ -1,6 +1,10 @@
+@import "../../style.scss";
+
 .rightbar {
+    @include themify($themes) {
     flex: 3;
-    background-color: azure;
+    background-color: themed('bg');
+    color: themed('textColor');
     position: sticky;
     top: 70px;
     height: calc(100vh - 70px);
@@ -17,9 +21,9 @@
             padding: 20px;
             box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
             margin-bottom: 20px;
-
+            background-color: themed('bgSoft');
             span {
-                color: grey;
+                color: themed('textColor');
             }
 
             .suggestedUser {
@@ -66,4 +70,6 @@
             }
         }
    }
+}
+        
 }

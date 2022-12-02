@@ -1,6 +1,9 @@
+@import "../../style.scss";
 .sidebar{
+    @include themify($themes) {
     flex: 2;
-    background-color: azure;
+    background-color: themed('bg');
+    color: themed('textColor');
     position: sticky;
     top: 70px;
     height: calc(100vh - 70px);
@@ -29,4 +32,5 @@
             }
         }
     }
+}
 }

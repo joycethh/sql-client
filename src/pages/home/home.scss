@@ -1,3 +1,10 @@
+@import "../../style.scss";
+
 .home {
-    flex: 6
+    @include themify($themes) {
+    flex: 6;
+    padding: 20px;
+    background-color: themed('bgSoft');
+    color: themed('textColor')
+}
 }
