@@ -1,4 +1,4 @@
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import "./sidebar.scss";
 
@@ -8,7 +8,7 @@ const SideBar = () => {
       <div className="container">
         <div className="menu">
           <div className="item" style={{ display: "flex" }}>
-            <PersonOutlineOutlinedIcon />
+            <AccountCircleOutlinedIcon />
             <span>user's name</span>
           </div>
 

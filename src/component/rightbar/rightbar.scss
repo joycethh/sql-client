@@ -1,6 +1,6 @@
 .rightbar {
     flex: 3;
-    background-color: aquamarine;
+    background-color: azure;
     position: sticky;
     top: 70px;
     height: calc(100vh - 70px);
@@ -9,4 +9,61 @@
     &::-webkit-scrollbar {
         display: none;
     }
+
+   .container {
+        padding: 20px;
+
+        .item {
+            padding: 20px;
+            box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+            margin-bottom: 20px;
+
+            span {
+                color: grey;
+            }
+
+            .suggestedUser {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 20px 0px;
+
+                .userInfo {
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+                    position: relative;
+
+                    span {
+                        font-weight:500;
+                    
+                    }
+
+                }
+
+                .actions {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+
+                    button {
+                        border: none;
+                        padding: 5px;
+                        
+                        cursor: pointer;
+
+                        &:first-child {
+                            background-color: #5F9DF7;
+                            color: #fff;
+                        }
+
+                        &:second-child {
+                            background-color: #FFF4CF ;
+                            color: #1746A2;
+                        }
+                    }
+                }
+            }
+        }
+   }
 }
