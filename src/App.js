@@ -40,7 +40,7 @@ function App() {
       path: "/",
       element: (
         <ProtectedRoute>
-          <Layout />
+          <Layout style={{ flex: 6 }} />
         </ProtectedRoute>
       ),
       children: [

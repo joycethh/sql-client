@@ -1,0 +1,23 @@
+.sidebar{
+    flex: 2;
+    background-color: azure;
+    .container {
+        padding: 20px;
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap:10px;
+
+            .item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                span {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
