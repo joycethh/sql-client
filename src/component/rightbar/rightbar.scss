@@ -1,4 +1,12 @@
 .rightbar {
-    flex: 2;
+    flex: 3;
     background-color: aquamarine;
+    position: sticky;
+    top: 70px;
+    height: calc(100vh - 70px);
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
