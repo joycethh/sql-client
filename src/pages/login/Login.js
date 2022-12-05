@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import "./login.scss";
 import { AuthContext } from "../../context/authContext";
 const Login = () => {
-  const { currentUser, login } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const handleLogin = () => {
-    login(currentUser);
+    login();
   };
 
   return (
@@ -23,9 +23,9 @@ const Login = () => {
         <div className="right">
           <h1>Login</h1>
           <form>
-            <input type="text" placeHolder="Username" />
-            <input type="password" placeHolder="Password" />
-            <button onclick={handleLogin}>Submit</button>
+            <input type="text" placeholder="Username" />
+            <input type="password" placeholder="Password" />
+            <button onClick={handleLogin}>Submit</button>
           </form>
         </div>
       </div>

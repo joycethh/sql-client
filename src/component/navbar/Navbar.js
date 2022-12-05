@@ -12,10 +12,11 @@ import {
 
 import "./navbar.scss";
 import { DarkModeContext } from "../../context/darkModeContext";
+import { AuthContext } from "../../context/authContext";
 
 const Navbar = () => {
   const { isDarkMode, toggle } = useContext(DarkModeContext);
-
+  const { currentUser } = useContext(AuthContext);
   return (
     <div className="navbar">
       <div className="left">
@@ -38,11 +39,8 @@ const Navbar = () => {
         <EmailOutlined />
         <NotificationsOutlined />
         <div className="user">
-          <img
-            src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png"
-            alt="user"
-          />
-          <span>user's name</span>
+          <img src={currentUser.profilePic} alt="avatar" />
+          <span>{currentUser.name}</span>
         </div>
       </div>
     </div>
