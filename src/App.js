@@ -14,11 +14,12 @@ import Profile from "./pages/profile/Profile";
 import Home from "./pages/home/Home";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+import { AuthContext } from "./context/authContext";
 
 function App() {
-  const currentUser = true;
   const { isDarkMode } = useContext(DarkModeContext);
-
+  const { currentUser } = useContext(AuthContext);
+  console.log("currentUser in the navbar", currentUser);
   const Layout = () => {
     return (
       <div className={`theme-${isDarkMode ? "dark" : "light"}`}>
