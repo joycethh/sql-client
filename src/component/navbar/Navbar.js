@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   HomeOutlined,
   BedtimeOutlined,
+  LightModeOutlined,
   SearchOutlined,
   PersonOutlineOutlined,
   NotificationsOutlined,
@@ -9,8 +11,11 @@ import {
 } from "@mui/icons-material/";
 
 import "./navbar.scss";
+import { DarkModeContext } from "../../context/darkModeContext";
 
 const Navbar = () => {
+  const { isDarkMode, toggle } = useContext(DarkModeContext);
+
   return (
     <div className="navbar">
       <div className="left">
@@ -18,7 +23,11 @@ const Navbar = () => {
           <span>Funget2</span>
         </Link>
         <HomeOutlined />
-        <BedtimeOutlined />
+        {isDarkMode ? (
+          <LightModeOutlined onClick={toggle} />
+        ) : (
+          <BedtimeOutlined onClick={toggle} />
+        )}
         <div className="search">
           <SearchOutlined />
           <input type="text" placeholder="Search..." />

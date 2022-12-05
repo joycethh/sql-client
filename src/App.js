@@ -12,13 +12,16 @@ import Login from "../src/pages/login/Login";
 import Register from "./pages/register/Register";
 import Profile from "./pages/profile/Profile";
 import Home from "./pages/home/Home";
+import { useContext } from "react";
+import { DarkModeContext } from "./context/darkModeContext";
 
 function App() {
   const currentUser = true;
+  const { isDarkMode } = useContext(DarkModeContext);
 
   const Layout = () => {
     return (
-      <div className="theme-dark">
+      <div className={`theme-${isDarkMode ? "dark" : "light"}`}>
         <Navbar />
         <div style={{ display: "flex" }}>
           <SideBar />
