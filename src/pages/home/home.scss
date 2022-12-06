@@ -5,6 +5,13 @@
     flex: 6;
     padding: 20px;
     background-color: themed('bgSoft');
-    color: themed('textColor')
+    color: themed('textColor');
+
+    @include mobile{
+        padding: 10px;
+    }
+
+   
+
 }
 }
