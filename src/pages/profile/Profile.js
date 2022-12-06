@@ -9,6 +9,7 @@ import {
   MoreHoriz,
 } from "@mui/icons-material/";
 import "./profile.scss";
+import PostLists from "../../component/postLists/PostLists";
 // import { AuthContext } from "../../context/authContext";
 
 const Profile = () => {
@@ -64,6 +65,8 @@ const Profile = () => {
             <MoreHoriz />
           </div>
         </div>
+
+        <PostLists />
       </div>
     </div>
   );
