@@ -46,7 +46,7 @@ const Profile = () => {
 
           <div className="center">
             <span>user's name</span>
-            <div className="icons">
+            <div className="info">
               <div className="item">
                 <PlaceOutlined />
                 <span>USA</span>
@@ -55,8 +55,8 @@ const Profile = () => {
                 <Language />
                 <span>Chinese</span>
               </div>
-              <button>Follow</button>
             </div>
+            <button>Follow</button>
           </div>
 
           <div className="right">
