@@ -1,3 +1,4 @@
+@import "../../style.scss";
 .login{
     height: 100vh;
     background-color:rgb(193, 190, 255);
@@ -13,6 +14,12 @@
         min-height:600px;
         overflow: hidden;
 
+        @include mobile{
+            width: 100%;
+            padding: 10px;
+          
+         }
+
         .left{
             flex:1;
             background: 
@@ -27,6 +34,10 @@
             gap: 30px;
             color: #fff;
 
+            @include mobile{
+                display: none;
+            }
+            
             h1{
                 font-size: 80px;
                 line-height: 80px;

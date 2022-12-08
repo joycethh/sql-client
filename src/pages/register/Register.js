@@ -9,10 +9,10 @@ const Register = () => {
         <div className="right">
           <h1>Register</h1>
           <form>
-            <input type="text" placeHolder="Username" />
-            <input type="email" placeHolder="Email" />
-            <input type="password" placeHolder="Password" />
-            <input type="password" placeHolder="Repeat Password" />
+            <input type="text" placeholder="Username" />
+            <input type="email" placeholder="Email" />
+            <input type="password" placeholder="Password" />
+            <input type="password" placeholder="Repeat Password" />
             <button>Submit</button>
           </form>
         </div>
@@ -20,7 +20,7 @@ const Register = () => {
           <h1>Hello there!</h1>
           <p>There are tons of new feeds are waiting for you.</p>
           <span>Already have an acccount? </span>
-          <Link to="login">
+          <Link to="/login">
             <button>Login</button>
           </Link>
         </div>
