@@ -1,11 +1,29 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./login.scss";
 import { AuthContext } from "../../context/authContext";
+
 const Login = () => {
+  const [input, setInput] = useState({
+    username: "",
+    password: "",
+  });
+  const [err, setErr] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
+  // console.log("input", input);
+
   const { login } = useContext(AuthContext);
-  const handleLogin = () => {
-    login();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await login(input);
+    } catch (error) {
+      setErr(error.response.data);
+    }
   };
 
   return (
@@ -22,9 +40,24 @@ const Login = () => {
 
         <div className="right">
           <h1>Login</h1>
-          <form>
-            <input type="text" placeholder="Username" />
-            <input type="password" placeholder="Password" />
+          <form onSubmit={handleLogin}>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleChange}
+            />
+            {err && (
+              <div className="error">
+                <p>{err}</p>
+              </div>
+            )}
             <button onClick={handleLogin}>Submit</button>
           </form>
         </div>
