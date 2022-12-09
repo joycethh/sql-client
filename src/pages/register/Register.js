@@ -11,6 +11,7 @@ const Register = () => {
     password: "",
     repeatedPassword: "",
   });
+  const [err, setErr] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,11 +20,15 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post(
-      "http://localhost:8000/api/auth/register",
-      input
-    );
-    console.log("response", response);
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/auth/register",
+        input
+      );
+      console.log("register response", response);
+    } catch (error) {
+      setErr(error.response.data);
+    }
   };
   return (
     <div className="register">
@@ -55,6 +60,11 @@ const Register = () => {
               placeholder="Name"
               onChange={handleChange}
             />
+            {err && (
+              <div className="error">
+                <p>{err}</p>
+              </div>
+            )}
             <button onClick={handleSubmit}>Submit</button>
           </form>
         </div>
