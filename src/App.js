@@ -5,6 +5,8 @@ import {
   Navigate,
 } from "react-router-dom";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import Navbar from "./component/navbar/Navbar";
 import RightBar from "./component/rightbar/RightBar";
 import SideBar from "./component/sidebar/SideBar";
@@ -19,17 +21,20 @@ import { AuthContext } from "./context/authContext";
 function App() {
   const { isDarkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
-  console.log("currentUser in the navbar", currentUser);
+  const queryClient = new QueryClient();
+
   const Layout = () => {
     return (
-      <div className={`theme-${isDarkMode ? "dark" : "light"}`}>
-        <Navbar />
-        <div style={{ display: "flex" }}>
-          <SideBar />
-          <Outlet />
-          <RightBar />
+      <QueryClientProvider client={queryClient}>
+        <div className={`theme-${isDarkMode ? "dark" : "light"}`}>
+          <Navbar />
+          <div style={{ display: "flex" }}>
+            <SideBar />
+            <Outlet />
+            <RightBar />
+          </div>
         </div>
-      </div>
+      </QueryClientProvider>
     );
   };
 

@@ -11,7 +11,7 @@ const SideBar = () => {
       <div className="container">
         <div className="menu">
           <div className="item" style={{ display: "flex" }}>
-            <img src={currentUser.profilePic} alt="avatar" />
+            <img src={currentUser.profilePic} alt="" />
             <span>{currentUser.name}</span>
           </div>
 

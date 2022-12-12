@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./login.scss";
 import { AuthContext } from "../../context/authContext";
 
@@ -9,18 +9,19 @@ const Login = () => {
     password: "",
   });
   const [err, setErr] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
-  // console.log("input", input);
 
   const { login } = useContext(AuthContext);
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await login(input);
+      navigate("/");
     } catch (error) {
       setErr(error.response.data);
     }
