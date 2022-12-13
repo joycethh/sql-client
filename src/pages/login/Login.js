@@ -21,7 +21,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(input);
-      navigate("/", { replace: true });
+      navigate("/");
     } catch (error) {
       console.log(error);
       setErr(error.response.data);

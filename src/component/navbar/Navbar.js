@@ -8,6 +8,7 @@ import {
   PersonOutlineOutlined,
   NotificationsOutlined,
   EmailOutlined,
+  AddCircleOutlineOutlined,
 } from "@mui/icons-material/";
 
 import "./navbar.scss";
@@ -38,6 +39,9 @@ const Navbar = () => {
         <PersonOutlineOutlined />
         <EmailOutlined />
         <NotificationsOutlined />
+        <Link to="/create" style={{ textDecoration: "none" }}>
+          <AddCircleOutlineOutlined />
+        </Link>
         <div className="user">
           <img src={currentUser.profilePic} alt="" />
           <span>{currentUser.name}</span>
