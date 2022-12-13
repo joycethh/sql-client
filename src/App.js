@@ -21,6 +21,8 @@ import { AuthContext } from "./context/authContext";
 function App() {
   const { isDarkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
+
+  // Create a client
   const queryClient = new QueryClient();
 
   const Layout = () => {

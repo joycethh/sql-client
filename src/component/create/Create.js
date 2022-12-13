@@ -1,42 +1,37 @@
-import "./create.scss";
+import { useContext, useState } from "react";
+import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
 import {
   ImageOutlined,
   AddLocationAltOutlined,
   AlternateEmailOutlined,
 } from "@mui/icons-material";
-import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import "./create.scss";
+import { API } from "../../axios";
 
 const Create = () => {
+  const { currentUser } = useContext(AuthContext);
   const [file, setFile] = useState(null);
   const [desc, setDesc] = useState("");
 
-  const upload = async () => {
-    try {
-    } catch (err) {
-      console.log(err);
+  // Access the client
+  const queryClient = useQueryClient();
+
+  // Mutations
+  const mutation = useMutation(
+    (newPost) => {
+      return API.post("/posts", newPost);
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries(["posts"]);
+      },
     }
-  };
-
-  const { currentUser } = useContext(AuthContext);
-  console.log("currentUser", currentUser);
-  //   const queryClient = useQueryClient();
-
-  //   const mutation = useMutation({
-  //     onSuccess: () => {
-  //       // Invalidate and refetch
-  //       queryClient.invalidateQueries(["posts"]);
-  //     },
-  //   });
-
+  );
   const handleClick = async (e) => {
     e.preventDefault();
-    // let imgUrl = "";
-    // if (file) imgUrl = await upload();
-    // mutation.mutate({ desc, img: imgUrl });
-    // setDesc("");
-    setFile(null);
+    mutation.mutate({ desc });
   };
 
   return (

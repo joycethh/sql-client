@@ -6,6 +6,7 @@ import { API } from "../../axios";
 //TEMPORARY
 
 const PostLists = () => {
+  // Queries
   const { isLoading, error, data } = useQuery(["posts"], async () => {
     const { data } = await API.get("/posts");
     return data;
