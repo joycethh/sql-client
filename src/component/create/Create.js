@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import {
   ImageOutlined,
   AddLocationAltOutlined,
@@ -13,6 +13,18 @@ const Create = () => {
   const { currentUser } = useContext(AuthContext);
   const [file, setFile] = useState(null);
   const [desc, setDesc] = useState("");
+
+  const upload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const response = await API.post("/upload", formData);
+      console.log("file response", response);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // Access the client
   const queryClient = useQueryClient();
