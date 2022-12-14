@@ -35,14 +35,13 @@ const PostExcerpt = ({ post }) => {
           </div>
           <div className="item" onClick={() => setOpenComments(!openComments)}>
             <TextsmsOutlined />
-            12 Comments
           </div>
           <div className="item">
             <ShareOutlined />
             Share
           </div>
         </div>
-        {openComments && <Comments />}
+        {openComments && <Comments postId={post.id} />}
       </div>
     </div>
   );
