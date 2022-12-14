@@ -9,7 +9,8 @@ const Comments = ({ postId }) => {
   const { currentUser } = useContext(AuthContext);
   // Queries
   const { isLoading, error, data } = useQuery(["comments"], async () => {
-    const { data } = await API.get("/comments?postId=" + postId);
+    // const { data } = await API.get("/comments?postId=" + postId);
+    const { data } = await API.get(`/comments?postId=${postId}`);
     return data;
   });
 
