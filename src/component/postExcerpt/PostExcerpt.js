@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import moment from "moment";
 import Comments from "../comments/Comments";
 import "./postExcerpt.scss";
 import {
@@ -19,7 +20,7 @@ const PostExcerpt = ({ post }) => {
             <img src={post.profilePic} alt="" />
             <div className="details">
               <span className="authorName">{post.name}</span>
-              <span className="date">1 min ago</span>
+              <span className="date">{moment(post.createdAt).fromNow()}</span>
             </div>
           </div>
           <MoreHoriz />

@@ -47,6 +47,8 @@ const Create = () => {
     let imgUrl = "";
     if (file) imgUrl = await upload();
     mutation.mutate({ desc, image: imgUrl });
+    setDesc("");
+    setFile(null);
   };
 
   return (
