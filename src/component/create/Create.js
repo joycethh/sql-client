@@ -43,7 +43,10 @@ const Create = () => {
   );
   const handleClick = async (e) => {
     e.preventDefault();
-    mutation.mutate({ desc });
+
+    let imgUrl = "";
+    if (file) imgUrl = await upload();
+    mutation.mutate({ desc, imgage: imgUrl });
   };
 
   return (
