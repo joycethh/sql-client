@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import moment from "moment";
 import Comments from "../comments/Comments";
 import "./postExcerpt.scss";
@@ -7,10 +7,23 @@ import {
   ShareOutlined,
   TextsmsOutlined,
   ThumbUpOutlined,
+  ThumbUpAlt,
 } from "@mui/icons-material";
+import { AuthContext } from "../../context/authContext";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { API } from "../../axios";
 
 const PostExcerpt = ({ post }) => {
+  const { currentUser } = useContext(AuthContext);
   const [openComments, setOpenComments] = useState(false);
+
+  //queries request
+  const { isLoading, error, data } = useQuery(["likes", post.id], async () => {
+    const response = await API.get("/likes?postId=" + post.id);
+    console.log("response.data", response.data);
+    return response.data;
+  });
+  console.log("like data", data);
 
   return (
     <div className="postExcerpt">
@@ -31,7 +44,12 @@ const PostExcerpt = ({ post }) => {
         </div>
         <div className="interations">
           <div className="item">
-            <ThumbUpOutlined />
+            {/* {liked ? (
+              <ThumbUpAlt sx={{ color: "#5271ff" }} />
+            ) : (
+              <ThumbUpOutlined />
+            )} */}
+            {/* {data.length} likes */}
           </div>
           <div className="item" onClick={() => setOpenComments(!openComments)}>
             <TextsmsOutlined />

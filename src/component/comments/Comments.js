@@ -15,8 +15,6 @@ const Comments = ({ postId }) => {
     return data;
   });
 
-  console.log("comment-data", data);
-
   // Access the client
   const queryClient = useQueryClient();
 
