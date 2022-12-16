@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "react-router-dom";
 import {
   FacebookTwoTone,
   LinkedIn,
@@ -13,77 +14,90 @@ import "./profile.scss";
 import PostLists from "../../component/postLists/PostLists";
 
 import { API } from "../../axios";
-import { useLocation } from "react-router-dom";
+
+import { AuthContext } from "../../context/authContext";
 
 const Profile = () => {
-  const userId = useLocation().pathname.split("/")[2];
+  const { currentUser } = useContext(AuthContext);
 
+  const userId = parseInt(useLocation().pathname.split("/")[2]);
+
+  //make get user query
   const { isLoading, error, data } = useQuery(["users"], async () => {
     const { data } = await API.get(`/users/find/${userId}`);
     return data;
   });
-
-  console.log("user-data", data);
-
-  if (isLoading) return "Loading...";
+  console.log("userData", data);
+  const handleFollow = () => {};
 
   if (error) return "An error has occurred: " + error.message;
 
   return (
     <div className="profile">
-      <div className="images">
-        <img src={data?.coverPic} alt="" className="cover" />
-        <img src={data?.profilePic} alt="" className="profilePicture" />
-      </div>
-      <div className="profileContainer">
-        <div className="userInfo">
-          <div className="left">
-            <a
-              href="https://www.facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FacebookTwoTone />
-            </a>
-            <a
-              href="https://www.linkedin.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LinkedIn />
-            </a>
-            <a
-              href="https://www.twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Twitter />
-            </a>
+      {isLoading ? (
+        "Loading"
+      ) : (
+        <>
+          {" "}
+          <div className="images">
+            <img src={data?.coverPic} alt="" className="cover" />
+            <img src={data?.profilePic} alt="" className="profilePicture" />
           </div>
-
-          <div className="center">
-            <span>{data?.name}</span>
-            <div className="info">
-              <div className="item">
-                <PlaceOutlined />
-                <span>{data?.city}</span>
+          <div className="profileContainer">
+            <div className="userInfo">
+              <div className="left">
+                <a
+                  href="https://www.facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FacebookTwoTone />
+                </a>
+                <a
+                  href="https://www.linkedin.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LinkedIn />
+                </a>
+                <a
+                  href="https://www.twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Twitter />
+                </a>
               </div>
-              <div className="item">
-                <Language />
-                <span>{data?.website}</span>
+
+              <div className="center">
+                <span>{data?.name}</span>
+                <div className="info">
+                  <div className="item">
+                    <PlaceOutlined />
+                    <span>{data?.city}</span>
+                  </div>
+                  <div className="item">
+                    <Language />
+                    <span>{data?.website}</span>
+                  </div>
+                </div>
+                {userId === currentUser.id ? (
+                  <button>Update</button>
+                ) : (
+                  <button onClick={handleFollow}>Follow</button>
+                )}
+              </div>
+
+              <div className="right">
+                <EmailOutlined />
+                <MoreHoriz />
               </div>
             </div>
-            <button>Follow</button>
-          </div>
 
-          <div className="right">
-            <EmailOutlined />
-            <MoreHoriz />
+            <PostLists />
           </div>
-        </div>
-
-        <PostLists />
-      </div>
+        </>
+      )}
     </div>
   );
 };
