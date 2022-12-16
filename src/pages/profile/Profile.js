@@ -28,6 +28,13 @@ const Profile = () => {
     return data;
   });
   console.log("userData", data);
+
+  //make get relation query
+  const { data: relationData } = useQuery(["relationships"], async () => {
+    const { data } = await API.get(`/relations?followedUserId=${userId}`);
+    return data;
+  });
+  console.log("relationData", relationData);
   const handleFollow = () => {};
 
   if (error) return "An error has occurred: " + error.message;
