@@ -18,13 +18,29 @@ const PostExcerpt = ({ post }) => {
   const [openComments, setOpenComments] = useState(false);
 
   //queries request
-  const { isLoading, error, data } = useQuery(["likes", post.id], async () => {
+  const { isLoading, data } = useQuery(["likes", post.id], async () => {
     const response = await API.get("/likes?postId=" + post.id);
     console.log("response.data", response.data);
     return response.data;
   });
-  console.log("like data", data);
 
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(
+    (liked) => {
+      if (liked) return API.delete(`/likes?postId=${post.id}`);
+      return API.post(`/likes?postId=${post.id}`);
+    },
+
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["likes"]);
+      },
+    }
+  );
+  const handleLike = () => {
+    mutation.mutate(data?.includes(currentUser.id));
+  };
   return (
     <div className="postExcerpt">
       <div className="container">
@@ -44,12 +60,14 @@ const PostExcerpt = ({ post }) => {
         </div>
         <div className="interations">
           <div className="item">
-            {/* {liked ? (
-              <ThumbUpAlt sx={{ color: "#5271ff" }} />
+            {isLoading ? (
+              "Loading"
+            ) : data?.includes(currentUser.id) ? (
+              <ThumbUpAlt sx={{ color: "#5271ff" }} onClick={handleLike} />
             ) : (
-              <ThumbUpOutlined />
-            )} */}
-            {/* {data.length} likes */}
+              <ThumbUpOutlined onClick={handleLike} />
+            )}
+            {data?.length} likes
           </div>
           <div className="item" onClick={() => setOpenComments(!openComments)}>
             <TextsmsOutlined />
