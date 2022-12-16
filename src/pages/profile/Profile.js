@@ -32,8 +32,8 @@ const Profile = () => {
   return (
     <div className="profile">
       <div className="images">
-        <img src={data[0]?.coverPic} alt="" className="cover" />
-        <img src={data[0]?.profilePic} alt="" className="profilePicture" />
+        <img src={data?.coverPic} alt="" className="cover" />
+        <img src={data?.profilePic} alt="" className="profilePicture" />
       </div>
       <div className="profileContainer">
         <div className="userInfo">
@@ -62,15 +62,15 @@ const Profile = () => {
           </div>
 
           <div className="center">
-            <span>{data[0]?.name}</span>
+            <span>{data?.name}</span>
             <div className="info">
               <div className="item">
                 <PlaceOutlined />
-                <span>{data[0]?.city}</span>
+                <span>{data?.city}</span>
               </div>
               <div className="item">
                 <Language />
-                <span>{data[0]?.website}</span>
+                <span>{data?.website}</span>
               </div>
             </div>
             <button>Follow</button>
