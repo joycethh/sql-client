@@ -14,14 +14,13 @@ const PostLists = () => {
 
   console.log("data", data);
 
-  if (isLoading) return "Loading...";
-
-  if (error) return "An error has occurred: " + error.message;
   return (
     <div className="postLists">
-      {data.map((post) => (
-        <PostExcerpt post={post} key={post.id} />
-      ))}
+      {error
+        ? "An error has occurred"
+        : isLoading
+        ? "Loading"
+        : data.map((post) => <PostExcerpt post={post} key={post.id} />)}
     </div>
   );
 };

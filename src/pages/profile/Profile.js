@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useQuery } from "@tanstack/react-query";
 import {
   FacebookTwoTone,
   LinkedIn,
@@ -10,14 +11,28 @@ import {
 } from "@mui/icons-material/";
 import "./profile.scss";
 import PostLists from "../../component/postLists/PostLists";
-// import { AuthContext } from "../../context/authContext";
+import { AuthContext } from "../../context/authContext";
+import { API } from "../../axios";
 
 const Profile = () => {
+  const { currentUser } = useContext(AuthContext);
+
+  const { isLoading, error, data } = useQuery(["users"], async () => {
+    const { data } = await API.get("/users");
+    return data;
+  });
+
+  console.log("user-data", data);
+
+  if (isLoading) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
   return (
     <div className="profile">
       <div className="images">
-        <img src="" alt="" className="cover" />
-        <img src="" alt="" className="profilePicture" />
+        <img src={currentUser.coverPic} alt="" className="cover" />
+        <img src={currentUser.profilePic} alt="" className="profilePicture" />
       </div>
       <div className="profileContainer">
         <div className="userInfo">
@@ -46,15 +61,15 @@ const Profile = () => {
           </div>
 
           <div className="center">
-            <span>user's name</span>
+            <span>{currentUser.name}</span>
             <div className="info">
               <div className="item">
                 <PlaceOutlined />
-                <span>USA</span>
+                <span>{currentUser.city}</span>
               </div>
               <div className="item">
                 <Language />
-                <span>Chinese</span>
+                <span>{currentUser.website}</span>
               </div>
             </div>
             <button>Follow</button>

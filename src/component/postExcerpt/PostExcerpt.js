@@ -20,7 +20,6 @@ const PostExcerpt = ({ post }) => {
   //queries request
   const { isLoading, data } = useQuery(["likes", post.id], async () => {
     const response = await API.get("/likes?postId=" + post.id);
-    console.log("response.data", response.data);
     return response.data;
   });
 
