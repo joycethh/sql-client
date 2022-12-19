@@ -120,7 +120,7 @@ const Profile = () => {
               </div>
             </div>
 
-            <PostLists />
+            <PostLists userId={userId} />
           </div>
         </>
       )}

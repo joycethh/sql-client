@@ -5,10 +5,10 @@ import "./postLists.scss";
 import { API } from "../../axios";
 //TEMPORARY
 
-const PostLists = () => {
+const PostLists = ({ userId }) => {
   // Queries
   const { isLoading, error, data } = useQuery(["posts"], async () => {
-    const { data } = await API.get("/posts");
+    const { data } = await API.get(`/posts?userId=${userId}`);
     return data;
   });
 
