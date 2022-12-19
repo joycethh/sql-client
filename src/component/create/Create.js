@@ -19,7 +19,7 @@ const Create = () => {
       const formData = new FormData();
       formData.append("file", file);
       const response = await API.post("/upload", formData);
-      console.log("file response", response);
+
       return response.data;
     } catch (err) {
       console.log(err);

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 import {
@@ -16,8 +16,11 @@ import PostLists from "../../component/postLists/PostLists";
 import { API } from "../../axios";
 
 import { AuthContext } from "../../context/authContext";
+import ProfileUpdate from "../../component/profileUpdate/ProfileUpdate";
 
 const Profile = () => {
+  const [openUpdate, setOpenUpdate] = useState(true);
+
   const { currentUser } = useContext(AuthContext);
 
   const userId = parseInt(useLocation().pathname.split("/")[2]);
@@ -50,6 +53,7 @@ const Profile = () => {
       },
     }
   );
+
   const handleFollow = () => {
     mutation.mutate(following);
   };
@@ -62,7 +66,6 @@ const Profile = () => {
         "Loading"
       ) : (
         <>
-          {" "}
           <div className="images">
             <img src={data?.coverPic} alt="" className="cover" />
             <img src={data?.profilePic} alt="" className="profilePicture" />
@@ -106,7 +109,7 @@ const Profile = () => {
                   </div>
                 </div>
                 {userId === currentUser.id ? (
-                  <button>Update</button>
+                  <button onClick={() => setOpenUpdate(true)}>Update</button>
                 ) : (
                   <button onClick={handleFollow}>
                     {following ? "Following" : "Follow"}
@@ -123,6 +126,10 @@ const Profile = () => {
             <PostLists userId={userId} />
           </div>
         </>
+      )}
+
+      {openUpdate && (
+        <ProfileUpdate setOpenUpdate={setOpenUpdate} user={data} />
       )}
     </div>
   );
