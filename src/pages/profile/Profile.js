@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 import {
   FacebookTwoTone,
@@ -27,15 +27,32 @@ const Profile = () => {
     const { data } = await API.get(`/users/find/${userId}`);
     return data;
   });
-  console.log("userData", data);
 
   //make get relation query
   const { data: relationData } = useQuery(["relationships"], async () => {
     const { data } = await API.get(`/relations?followedUserId=${userId}`);
+
     return data;
   });
-  console.log("relationData", relationData);
-  const handleFollow = () => {};
+  const following = relationData?.includes(currentUser.id);
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(
+    (followed) => {
+      if (followed) return API.delete(`/relations?followedUserId=${userId}`);
+      return API.post(`/relations?followedUserId=${userId}`);
+    },
+
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["relationships"]);
+      },
+    }
+  );
+  const handleFollow = () => {
+    mutation.mutate(following);
+  };
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -91,7 +108,9 @@ const Profile = () => {
                 {userId === currentUser.id ? (
                   <button>Update</button>
                 ) : (
-                  <button onClick={handleFollow}>Follow</button>
+                  <button onClick={handleFollow}>
+                    {following ? "Following" : "Follow"}
+                  </button>
                 )}
               </div>
 
