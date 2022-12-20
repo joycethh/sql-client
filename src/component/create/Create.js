@@ -15,11 +15,12 @@ const Create = () => {
   const [desc, setDesc] = useState("");
 
   const upload = async () => {
+    console.log("post-file", file);
     try {
       const formData = new FormData();
       formData.append("file", file);
       const response = await API.post("/upload", formData);
-
+      console.log("post-file-response", response);
       return response.data;
     } catch (err) {
       console.log(err);

@@ -19,7 +19,7 @@ import { AuthContext } from "../../context/authContext";
 import ProfileUpdate from "../../component/profileUpdate/ProfileUpdate";
 
 const Profile = () => {
-  const [openUpdate, setOpenUpdate] = useState(true);
+  const [openUpdate, setOpenUpdate] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
 
