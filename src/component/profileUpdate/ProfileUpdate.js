@@ -30,10 +30,6 @@ const ProfileUpdate = ({ setOpenUpdate, user }) => {
     setInput({ ...input, [name]: value });
   };
 
-  const handleCoverChange = (e) => {
-    console.log("e.target", e.target.files);
-    setCoverPic(e.target.files[0]);
-  };
   // Access the client
   const queryClient = useQueryClient();
 
@@ -63,22 +59,22 @@ const ProfileUpdate = ({ setOpenUpdate, user }) => {
     setOpenUpdate(false);
   };
   return (
-    <div className="profileUpdate">
-      <div className="warpper">
+    <div className="update">
+      <div className="wrapper">
+        <h1>Update Your Profile</h1>
         <form>
           <div className="files">
-            {/* cover */}
             <label htmlFor="cover">
               <span>Cover Picture</span>
               <div className="imgContainer">
-                {/* <img
+                <img
                   src={
                     coverPic
                       ? URL.createObjectURL(coverPic)
                       : "/upload/" + user.coverPic
                   }
                   alt=""
-                /> */}
+                />
                 <AddAPhoto className="icon" />
               </div>
             </label>
@@ -86,21 +82,19 @@ const ProfileUpdate = ({ setOpenUpdate, user }) => {
               type="file"
               id="cover"
               style={{ display: "none" }}
-              onChange={handleCoverChange}
+              onChange={(e) => setCoverPic(e.target.files[0])}
             />
-
-            {/* profile */}
             <label htmlFor="profile">
               <span>Profile Picture</span>
               <div className="imgContainer">
-                {/* <img
+                <img
                   src={
                     profilePic
                       ? URL.createObjectURL(profilePic)
                       : "/upload/" + user.profilePic
                   }
                   alt=""
-                /> */}
+                />
                 <AddAPhoto className="icon" />
               </div>
             </label>
@@ -112,23 +106,25 @@ const ProfileUpdate = ({ setOpenUpdate, user }) => {
             />
           </div>
 
+          <label>Country / City</label>
           <input
             type="text"
             name="city"
             value={input.city}
-            placeholder="City"
             onChange={handleChange}
           />
+          <label>Website</label>
           <input
             type="text"
             name="website"
-            placeholder="Website"
             value={input.website}
             onChange={handleChange}
           />
           <button onClick={handleUpdate}>Update</button>
         </form>
-        <button onClick={() => setOpenUpdate(false)}>Cancel</button>
+        <button className="cancel" onClick={() => setOpenUpdate(false)}>
+          Cancel
+        </button>
       </div>
     </div>
   );
