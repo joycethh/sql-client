@@ -46,7 +46,7 @@ const PostExcerpt = ({ post }) => {
   //delete mutation
   const deleteMutation = useMutation(
     (postId) => {
-      return API.delete("/posts/" + postId);
+      return API.delete(`/posts/${post.id}`);
     },
     {
       onSuccess: () => {
