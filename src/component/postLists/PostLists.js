@@ -9,10 +9,11 @@ const PostLists = ({ userId }) => {
   // Queries
   const { isLoading, error, data } = useQuery(["posts"], async () => {
     const { data } = await API.get(`/posts?userId=${userId}`);
+
     return data;
   });
 
-  console.log("data", data);
+  console.log("posts-data", data);
 
   return (
     <div className="postLists">

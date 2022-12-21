@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import Comments from "../comments/Comments";
 import "./postExcerpt.scss";
@@ -16,8 +17,9 @@ import { API } from "../../axios";
 const PostExcerpt = ({ post }) => {
   const { currentUser } = useContext(AuthContext);
   const [openComments, setOpenComments] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
-  //queries request
+  //like queries request
   const { isLoading, data } = useQuery(["likes", post.id], async () => {
     const response = await API.get("/likes?postId=" + post.id);
     return response.data;
@@ -40,18 +42,43 @@ const PostExcerpt = ({ post }) => {
   const handleLike = () => {
     mutation.mutate(data?.includes(currentUser.id));
   };
+
+  //delete mutation
+  const deleteMutation = useMutation(
+    (postId) => {
+      return API.delete("/posts/" + postId);
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries(["posts"]);
+      },
+    }
+  );
+
+  const handleDelete = () => {
+    deleteMutation.mutate(post.id);
+  };
   return (
     <div className="postExcerpt">
       <div className="container">
         <div className="author">
           <div className="authorInfo">
-            <img src={post.profilePic || `/upload/${post.profilePic}`} alt="" />
+            <img src={`/upload/${post.profilePic}` || post.profilePic} alt="" />
             <div className="details">
-              <span className="authorName">{post.name}</span>
+              <Link
+                to={`/profile/${post.userId}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <span className="authorName">{post.name}</span>
+              </Link>
               <span className="date">{moment(post.createdAt).fromNow()}</span>
             </div>
           </div>
-          <MoreHoriz />
+          <MoreHoriz onClick={() => setOpenMenu(!openMenu)} />
+          {openMenu && post.userId === currentUser.id && (
+            <button onClick={handleDelete}> Delete </button>
+          )}
         </div>
         <div className="content">
           <p>{post.desc}</p>
