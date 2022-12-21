@@ -45,7 +45,7 @@ const PostExcerpt = ({ post }) => {
       <div className="container">
         <div className="author">
           <div className="authorInfo">
-            <img src={post.profilePic} alt="" />
+            <img src={post.profilePic || `/upload/${post.profilePic}`} alt="" />
             <div className="details">
               <span className="authorName">{post.name}</span>
               <span className="date">{moment(post.createdAt).fromNow()}</span>
