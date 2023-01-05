@@ -38,9 +38,9 @@ const Login = () => {
           </div>
           <form onSubmit={handleLogin}>
             <input
-              type="text"
-              name="username"
-              placeholder="Username"
+              type="email"
+              name="email"
+              placeholder="Email"
               onChange={handleChange}
             />
             <input
