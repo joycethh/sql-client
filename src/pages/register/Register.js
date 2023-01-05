@@ -33,8 +33,12 @@ const Register = () => {
   return (
     <div className="register">
       <div className="card">
-        <div className="right">
-          <h1>Register</h1>
+        <div className="left">
+          <div className="title">
+            <h1>Register</h1>
+            <Link to="/login"> Login</Link>
+          </div>
+
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -68,7 +72,7 @@ const Register = () => {
             <button onClick={handleSubmit}>Submit</button>
           </form>
         </div>
-        <div className="left">
+        <div className="right">
           <h1>Hello there!</h1>
           <p>There are tons of new feeds are waiting for you.</p>
           <span>Already have an acccount? </span>

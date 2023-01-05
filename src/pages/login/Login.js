@@ -32,16 +32,10 @@ const Login = () => {
     <div className="login">
       <div className="card">
         <div className="left">
-          <h1>Welcome back!</h1>
-          <p>There are tons of new feeds are waiting for you.</p>
-          <span>New here?</span>
-          <Link to="/register">
-            <button> Register</button>
-          </Link>
-        </div>
-
-        <div className="right">
-          <h1>Login</h1>
+          <div className="title">
+            <h1>Login</h1>
+            <Link to="/register"> Register</Link>
+          </div>
           <form onSubmit={handleLogin}>
             <input
               type="text"
@@ -62,6 +56,15 @@ const Login = () => {
             )}
             <button onClick={handleLogin}>Submit</button>
           </form>
+        </div>
+
+        <div className="right">
+          <h1>Welcome back!</h1>
+          <p>There are tons of new feeds are waiting for you.</p>
+          <span>New here?</span>
+          <Link to="/register">
+            <button> Register</button>
+          </Link>
         </div>
       </div>
     </div>
