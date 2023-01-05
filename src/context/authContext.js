@@ -16,13 +16,14 @@ export const AuthContextProvider = ({ children }) => {
         withCredentials: true,
       }
     );
-    console.log("response", response);
+
     setCurrentUser(response.data);
   };
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);
+  // console.log("currentuser in authcontext", currentUser);
 
   return (
     <AuthContext.Provider value={{ currentUser, login }}>

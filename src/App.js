@@ -21,6 +21,9 @@ import { AuthContext } from "./context/authContext";
 function App() {
   const { isDarkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
+  // const currentUser = JSON.parse(localStorage.getItem("user"));
+  //TODOS: the "currentuser" is null in the beginning which cause a problem that a user has to login twice
+  console.log("current user in app", currentUser);
 
   // Create a client
   const queryClient = new QueryClient();
@@ -41,11 +44,12 @@ function App() {
   };
 
   const ProtectedRoute = ({ children }) => {
-    if (!currentUser) {
+    if (currentUser === null) {
       return <Navigate to="/login" />;
     }
     return children;
   };
+
   const router = createBrowserRouter([
     {
       path: "/",
