@@ -21,8 +21,15 @@ import { AuthContext } from "./context/authContext";
 function App() {
   const { isDarkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
-  // const currentUser = JSON.parse(localStorage.getItem("user"));
+
   //TODOS: the "currentuser" is null in the beginning which cause a problem that a user has to login twice
+  // const initialUser = JSON.parse(localStorage.getItem("user"));
+  // const [currentUser, setCurrentUser] = useState(initialUser);
+
+  // useEffect(() => {
+  //   if (currentUser !== initialUser) setCurrentUser(initialUser);
+  // }, [currentUser, initialUser]);
+
   console.log("current user in app", currentUser);
 
   // Create a client
