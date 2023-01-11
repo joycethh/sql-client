@@ -20,13 +20,26 @@ export const AuthContextProvider = ({ children }) => {
     setCurrentUser(response.data);
   };
 
+  const register = async (input) => {
+    const response = await axios.post(
+      "http://localhost:8000/api/auth/register",
+      input,
+      {
+        withCredentials: true,
+      }
+    );
+    console.log("register response", response);
+
+    setCurrentUser(response.data);
+  };
+
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);
   // console.log("currentuser in authcontext", currentUser);
 
   return (
-    <AuthContext.Provider value={{ currentUser, login }}>
+    <AuthContext.Provider value={{ currentUser, login, register }}>
       {children}
     </AuthContext.Provider>
   );
