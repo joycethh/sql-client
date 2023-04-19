@@ -64,7 +64,8 @@ const PostExcerpt = ({ post }) => {
       <div className="container">
         <div className="author">
           <div className="authorInfo">
-            <img src={`/upload/${post.profilePic}` || post.profilePic} alt="" />
+            {/* <img src={`/upload/${post.profilePic}`} /> */}
+            <img src={post.profilePic} alt="" />
             <div className="details">
               <Link
                 to={`/profile/${post.userId}`}
