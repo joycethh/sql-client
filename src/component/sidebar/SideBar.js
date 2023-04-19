@@ -10,22 +10,19 @@ const SideBar = () => {
     <div className="sidebar">
       <div className="container">
         <div className="menu">
-          <div className="item" style={{ display: "flex" }}>
+          <div className="item">
             <img src={currentUser?.profilePic} alt="" />
-
-            <span>
-              <Link
-                to={`/profile/${currentUser?.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                {currentUser?.name}
-              </Link>
-            </span>
+            <Link
+              to={`/profile/${currentUser?.id}`}
+              style={{ textDecoration: "none" }}
+            >
+              {currentUser?.name}
+            </Link>
           </div>
 
           <div className="item">
             <ArticleOutlinedIcon />
-            <span>Newsfeed</span>
+            <Link to="/newsfeed">Newsfeed</Link>
           </div>
         </div>
       </div>
