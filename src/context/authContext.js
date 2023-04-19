@@ -28,7 +28,6 @@ export const AuthContextProvider = ({ children }) => {
         withCredentials: true,
       }
     );
-    console.log("register response", response);
 
     setCurrentUser(response.data);
   };
@@ -36,7 +35,6 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);
-  // console.log("currentuser in authcontext", currentUser);
 
   return (
     <AuthContext.Provider value={{ currentUser, login, register }}>

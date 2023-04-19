@@ -11,14 +11,14 @@ const SideBar = () => {
       <div className="container">
         <div className="menu">
           <div className="item" style={{ display: "flex" }}>
-            <img src={currentUser.profilePic} alt="" />
+            <img src={currentUser?.profilePic} alt="" />
 
             <span>
               <Link
-                to={`/profile/${currentUser.id}`}
+                to={`/profile/${currentUser?.id}`}
                 style={{ textDecoration: "none" }}
               >
-                {currentUser.name}
+                {currentUser?.name}
               </Link>
             </span>
           </div>

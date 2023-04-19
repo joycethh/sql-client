@@ -45,8 +45,8 @@ const Navbar = () => {
           <AddCircleOutlineOutlined />
         </Link>
         <div className="user">
-          <img src={currentUser.profilePic} alt="" />
-          <span>{currentUser.name}</span>
+          <img src={currentUser?.profilePic} alt="" />
+          <span>{currentUser?.name}</span>
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ const Profile = () => {
 
     return data;
   });
-  const following = relationData?.includes(currentUser.id);
+  const following = relationData?.includes(currentUser?.id);
 
   const queryClient = useQueryClient();
 
