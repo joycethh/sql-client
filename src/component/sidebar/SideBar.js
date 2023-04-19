@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import "./sidebar.scss";
 import { AuthContext } from "../../context/authContext";
 
 const SideBar = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, logout } = useContext(AuthContext);
   return (
     <div className="sidebar">
       <div className="container">
@@ -23,6 +24,11 @@ const SideBar = () => {
           <div className="item">
             <ArticleOutlinedIcon />
             <Link to="/newsfeed">Newsfeed</Link>
+          </div>
+
+          <div className="item">
+            <LogoutOutlinedIcon />
+            <button onClick={() => logout()}>Log Out</button>
           </div>
         </div>
       </div>
