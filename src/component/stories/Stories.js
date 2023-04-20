@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../context/authContext";
+import React from "react";
+import { useAuthContext } from "../../context/authContext";
 import "./stories.scss";
 //TEMPORARY
 const stories = [
@@ -26,7 +26,7 @@ const stories = [
 ];
 
 const Stories = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useAuthContext();
 
   return (
     <div className="stories">

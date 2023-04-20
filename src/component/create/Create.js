@@ -1,16 +1,16 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import {
   ImageOutlined,
   AddLocationAltOutlined,
   AlternateEmailOutlined,
 } from "@mui/icons-material";
-import { AuthContext } from "../../context/authContext";
+import { useAuthContext } from "../../context/authContext";
 import "./create.scss";
 import { API } from "../../axios";
 
 const Create = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useAuthContext();
   const [file, setFile] = useState(null);
   const [desc, setDesc] = useState("");
 

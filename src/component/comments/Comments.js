@@ -1,12 +1,12 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { API } from "../../axios";
-import { AuthContext } from "../../context/authContext";
+import { useAuthContext } from "../../context/authContext";
 import "./comments.scss";
 import moment from "moment";
 
 const Comments = ({ postId }) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useAuthContext();
   const [desc, setDesc] = useState("");
   // Queries
   const { isLoading, error, data } = useQuery(["comments"], async () => {

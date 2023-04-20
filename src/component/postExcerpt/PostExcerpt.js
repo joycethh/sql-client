@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Comments from "../comments/Comments";
@@ -10,12 +10,12 @@ import {
   ThumbUpOutlined,
   ThumbUpAlt,
 } from "@mui/icons-material";
-import { AuthContext } from "../../context/authContext";
+import { useAuthContext } from "../../context/authContext";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { API } from "../../axios";
 
 const PostExcerpt = ({ post }) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useAuthContext();
   const [openComments, setOpenComments] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 

@@ -1,12 +1,11 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
+export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
-  );
+  const [currentUser, setCurrentUser] = useState(); // JSON.parse(localStorage.getItem("user")) || null
 
   const login = async (input) => {
     const response = await axios.post(
@@ -16,8 +15,10 @@ export const AuthContextProvider = ({ children }) => {
         withCredentials: true,
       }
     );
+    console.log("Login response:", response.data);
 
     setCurrentUser(response.data);
+    localStorage.setItem("user", JSON.stringify(response.data));
   };
 
   const register = async (input) => {
@@ -30,6 +31,7 @@ export const AuthContextProvider = ({ children }) => {
     );
 
     setCurrentUser(response.data);
+    localStorage.setItem("user", JSON.stringify(response.data));
   };
 
   const logout = () => {
@@ -37,9 +39,25 @@ export const AuthContextProvider = ({ children }) => {
     setCurrentUser(null);
   };
 
+  // useEffect(() => {
+  //   localStorage.setItem("user", JSON.stringify(currentUser));
+  // }, [currentUser]);
+
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(currentUser));
-  }, [currentUser]);
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log("currentUser from localStorage: ", user);
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     localStorage.setItem("user", JSON.stringify(currentUser));
+  //   } else {
+  //     localStorage.removeItem("user");
+  //   }
+  // }, [currentUser]);
 
   return (
     <AuthContext.Provider value={{ currentUser, login, register, logout }}>
