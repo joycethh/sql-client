@@ -13,7 +13,7 @@ const PostLists = ({ userId }) => {
     return data;
   });
 
-  console.log("posts-data", data);
+  // console.log("posts-data", data);
 
   return (
     <div className="postLists">

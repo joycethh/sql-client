@@ -1,12 +1,11 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import "./sidebar.scss";
-import { AuthContext } from "../../context/authContext";
+import { useAuthContext } from "../../context/authContext";
 
 const SideBar = () => {
-  const { currentUser, logout } = useContext(AuthContext);
+  const { currentUser, logout } = useAuthContext();
   return (
     <div className="sidebar">
       <div className="container">

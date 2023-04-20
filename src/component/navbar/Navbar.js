@@ -13,11 +13,11 @@ import {
 
 import "./navbar.scss";
 import { DarkModeContext } from "../../context/darkModeContext";
-import { AuthContext } from "../../context/authContext";
+import { useAuthContext } from "../../context/authContext";
 
 const Navbar = () => {
   const { isDarkMode, toggle } = useContext(DarkModeContext);
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useAuthContext();
   return (
     <div className="navbar">
       <div className="left">

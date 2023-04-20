@@ -15,13 +15,13 @@ import PostLists from "../../component/postLists/PostLists";
 
 import { API } from "../../axios";
 
-import { AuthContext } from "../../context/authContext";
+import { useAuthContext } from "../../context/authContext";
 import ProfileUpdate from "../../component/profileUpdate/ProfileUpdate";
 
 const Profile = () => {
   const [openUpdate, setOpenUpdate] = useState(false);
 
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useAuthContext();
 
   const userId = parseInt(useLocation().pathname.split("/")[2]);
 

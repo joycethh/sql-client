@@ -1,6 +1,6 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/authContext";
+import { useAuthContext } from "../../context/authContext";
 import "./register.scss";
 
 const Register = () => {
@@ -13,7 +13,7 @@ const Register = () => {
   const [err, setErr] = useState(null);
 
   const navigate = useNavigate();
-  const { register } = useContext(AuthContext);
+  const { register } = useAuthContext();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
