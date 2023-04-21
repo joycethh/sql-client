@@ -8,7 +8,6 @@ const Login = () => {
     username: "",
     password: "",
   });
-  const [err, setErr] = useState(null);
 
   const navigate = useNavigate();
 
@@ -51,11 +50,11 @@ const Login = () => {
               placeholder="Password"
               onChange={handleChange}
             />
-            {err && (
+            {/* {err && (
               <div className="error">
                 <p>{err}</p>
               </div>
-            )}
+            )} */}
             <button onClick={handleLogin}>Submit</button>
           </form>
         </div>
