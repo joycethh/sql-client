@@ -2,23 +2,48 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 const AuthContext = createContext();
-export const useAuthContext = () => useContext(AuthContext);
+// export const useAuthContext = () => useContext(AuthContext);
+export const useAuthContext = () => {
+  const authContext = useContext(AuthContext);
+  if (!authContext) {
+    throw new Error(
+      "useAuthContext must be used within an AuthContextProvider"
+    );
+  }
+  return authContext;
+};
 
 export const AuthContextProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(); // JSON.parse(localStorage.getItem("user")) || null
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("user"))
+  );
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log("currentUser/user from localStorage: ", user);
+    if (user) {
+      setCurrentUser(user);
+    } else {
+      setLoading(false);
+    }
+  }, []);
 
   const login = async (input) => {
-    const response = await axios.post(
-      "http://localhost:8000/api/auth/login",
-      input,
-      {
-        withCredentials: true,
-      }
-    );
-    console.log("Login response:", response.data);
-
-    setCurrentUser(response.data);
-    localStorage.setItem("user", JSON.stringify(response.data));
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/auth/login",
+        input,
+        {
+          withCredentials: true,
+        }
+      );
+      console.log("Login response data:", response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      setCurrentUser(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const register = async (input) => {
@@ -42,14 +67,13 @@ export const AuthContextProvider = ({ children }) => {
   // useEffect(() => {
   //   localStorage.setItem("user", JSON.stringify(currentUser));
   // }, [currentUser]);
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    console.log("currentUser from localStorage: ", user);
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem("user"));
+  //   console.log("currentUser from localStorage: ", user);
+  //   if (user) {
+  //     setCurrentUser(user);
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   if (currentUser) {
@@ -60,8 +84,10 @@ export const AuthContextProvider = ({ children }) => {
   // }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, register, logout }}>
-      {children}
+    <AuthContext.Provider
+      value={{ currentUser, loading, login, register, logout }}
+    >
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

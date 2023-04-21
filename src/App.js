@@ -16,21 +16,12 @@ import Profile from "./pages/profile/Profile";
 import Home from "./pages/home/Home";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
-import { AuthContext } from "./context/authContext";
+import { useAuthContext } from "./context/authContext";
 
 function App() {
   const { isDarkMode } = useContext(DarkModeContext);
-  const { currentUser } = useContext(AuthContext);
-
-  //TODOS: the "currentuser" is null in the beginning which cause a problem that a user has to login twice
-  // const initialUser = JSON.parse(localStorage.getItem("user"));
-  // const [currentUser, setCurrentUser] = useState(initialUser);
-
-  // useEffect(() => {
-  //   if (currentUser !== initialUser) setCurrentUser(initialUser);
-  // }, [currentUser, initialUser]);
-
-  console.log("current user in app", currentUser);
+  const { currentUser } = useAuthContext();
+  console.log("currentUser in app", currentUser);
 
   // Create a client
   const queryClient = new QueryClient();
@@ -51,10 +42,9 @@ function App() {
   };
 
   const ProtectedRoute = ({ children }) => {
-    if (currentUser === null) {
-      return <Navigate to="/login" />;
-    }
-    return children;
+    console.log("currentUser in protectedRoute", currentUser);
+
+    return currentUser ? children : <Navigate to="/login" replace={true} />;
   };
 
   const router = createBrowserRouter([

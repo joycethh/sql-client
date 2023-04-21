@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/authContext";
 import "./login.scss";
@@ -16,16 +16,19 @@ const Login = () => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const { currentUser, login } = useAuthContext();
+  const { login } = useAuthContext();
+  // console.log("currentUser", currentUser);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    await login(input);
-    console.log("currentUser after login:", currentUser); //null
-    navigate("/");
-
-    // setErr(err.response.data);
+    try {
+      await login(input);
+      // console.log("currentUser after login:", currentUser);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className="login">
