@@ -33,6 +33,9 @@
             border-radius: 5px;
             padding: 5px;
 
+            @include mobile {
+                display: none;
+            }
             input{
                 border: 0;
                 outline: none;
@@ -58,19 +61,11 @@
         align-items: center;
         gap: 10px;
 
-        @include mobile{
-            display: none;
-        }
         .user{
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 5px;
             font-weight: 500;
-
-            @include tablet{
-                display: none;
-            }
-        
 
             img{
                 width: 30px;

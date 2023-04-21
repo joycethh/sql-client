@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import {
-  HomeOutlined,
   BedtimeOutlined,
   LightModeOutlined,
   SearchOutlined,
@@ -21,8 +20,6 @@ const Navbar = () => {
         <Link to="/" style={{ textDecoration: "none" }}>
           <span>Funget2</span>
         </Link>
-
-        <HomeOutlined />
 
         {isDarkMode ? (
           <LightModeOutlined onClick={toggle} />
