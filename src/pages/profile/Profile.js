@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 import {
@@ -67,16 +67,16 @@ const Profile = () => {
       ) : (
         <>
           <div className="images">
-            <img src={`/upload/${data?.coverPic}`} alt="" className="cover" />
+            <img src={`${data?.coverPic}`} alt="" className="cover" />
             <img
-              src={`/upload/${data?.profilePic}`}
+              src={`${data?.profilePic}`}
               alt=""
               className="profilePicture"
             />
           </div>
           <div className="profileContainer">
             <div className="userInfo">
-              <div className="left">
+              {/* <div className="left">
                 <a
                   href="https://www.facebook.com"
                   target="_blank"
@@ -98,10 +98,10 @@ const Profile = () => {
                 >
                   <Twitter />
                 </a>
-              </div>
+              </div> */}
 
               <div className="center">
-                <span>{data?.name}</span>
+                <span className="title">{data?.name}</span>
                 <div className="info">
                   <div className="item">
                     <PlaceOutlined />
@@ -121,10 +121,10 @@ const Profile = () => {
                 )}
               </div>
 
-              <div className="right">
+              {/* <div className="right">
                 <EmailOutlined />
                 <MoreHoriz />
-              </div>
+              </div> */}
             </div>
 
             <PostLists userId={userId} />

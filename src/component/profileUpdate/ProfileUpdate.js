@@ -13,7 +13,6 @@ const ProfileUpdate = ({ setOpenUpdate, user }) => {
   });
 
   const upload = async (file) => {
-    console.log("profile-file", file);
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -68,11 +67,7 @@ const ProfileUpdate = ({ setOpenUpdate, user }) => {
               <span>Cover Picture</span>
               <div className="imgContainer">
                 <img
-                  src={
-                    coverPic
-                      ? URL.createObjectURL(coverPic)
-                      : "/upload/" + user.coverPic
-                  }
+                  src={coverPic ? URL.createObjectURL(coverPic) : user.coverPic}
                   alt=""
                 />
                 <AddAPhoto className="icon" />
@@ -91,7 +86,7 @@ const ProfileUpdate = ({ setOpenUpdate, user }) => {
                   src={
                     profilePic
                       ? URL.createObjectURL(profilePic)
-                      : "/upload/" + user.profilePic
+                      : user.profilePic
                   }
                   alt=""
                 />
@@ -106,7 +101,7 @@ const ProfileUpdate = ({ setOpenUpdate, user }) => {
             />
           </div>
 
-          <label>Country / City</label>
+          <label>City</label>
           <input
             type="text"
             name="city"
