@@ -5,8 +5,6 @@ import {
   LightModeOutlined,
   SearchOutlined,
   PersonOutlineOutlined,
-  NotificationsOutlined,
-  EmailOutlined,
   AddCircleOutlineOutlined,
 } from "@mui/icons-material/";
 
@@ -37,16 +35,15 @@ const Navbar = () => {
         </div>
       </div>
       <div className="right">
-        <PersonOutlineOutlined />
-        <EmailOutlined />
-        <NotificationsOutlined />
-        <Link to="/create" style={{ textDecoration: "none" }}>
-          <AddCircleOutlineOutlined />
-        </Link>
-        <div className="user">
-          <img src={currentUser?.profilePic} alt="" />
-          <span>{currentUser?.name}</span>
-        </div>
+        {/* <AddCircleOutlineOutlined /> */}
+        {currentUser ? (
+          <div className="user">
+            <img src={currentUser?.profilePic} alt="" />
+            <span>{currentUser?.name}</span>
+          </div>
+        ) : (
+          <PersonOutlineOutlined />
+        )}
       </div>
     </div>
   );
