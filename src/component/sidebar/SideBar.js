@@ -20,10 +20,10 @@ const SideBar = () => {
             </Link>
           </div>
 
-          <div className="item">
+          {/* <div className="item">
             <ArticleOutlinedIcon />
             <Link to="/newsfeed">Newsfeed</Link>
-          </div>
+          </div> */}
 
           <div className="item">
             <LogoutOutlinedIcon />

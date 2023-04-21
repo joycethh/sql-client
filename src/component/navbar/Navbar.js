@@ -5,7 +5,7 @@ import {
   LightModeOutlined,
   SearchOutlined,
   PersonOutlineOutlined,
-  AddCircleOutlineOutlined,
+  // AddCircleOutlineOutlined,
 } from "@mui/icons-material/";
 
 import "./navbar.scss";
