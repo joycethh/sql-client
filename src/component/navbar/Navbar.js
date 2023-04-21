@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   BedtimeOutlined,
   LightModeOutlined,
   SearchOutlined,
   PersonOutlineOutlined,
+  LogoutOutlined,
   // AddCircleOutlineOutlined,
 } from "@mui/icons-material/";
 
@@ -12,8 +14,13 @@ import { useDarkModeContext } from "../../context/darkModeContext";
 import { useAuthContext } from "../../context/authContext";
 
 const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isDarkMode, toggle } = useDarkModeContext();
-  const { currentUser } = useAuthContext();
+  const { currentUser, logout } = useAuthContext();
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   return (
     <div className="navbar">
       <div className="left">
@@ -21,25 +28,33 @@ const Navbar = () => {
           <span>Funget2</span>
         </Link>
 
-        {isDarkMode ? (
-          <LightModeOutlined onClick={toggle} />
-        ) : (
-          <BedtimeOutlined onClick={toggle} />
-        )}
         <div className="search">
           <input type="text" placeholder="Search..." />
           <SearchOutlined />
         </div>
       </div>
-      <div className="right">
-        {/* <AddCircleOutlineOutlined /> */}
-        {currentUser ? (
-          <div className="user">
-            <img src={currentUser?.profilePic} alt="" />
-            <span>{currentUser?.name}</span>
+      <div className="dropdown-container">
+        <div className="right">
+          {/* <AddCircleOutlineOutlined /> */}
+          {currentUser ? (
+            <div className="user" onClick={toggleMenu}>
+              <img src={currentUser?.profilePic} alt="" />
+              <span>{currentUser?.name}</span>
+            </div>
+          ) : (
+            <PersonOutlineOutlined />
+          )}
+        </div>
+
+        {isMenuOpen && (
+          <div className="dropdown-menu">
+            <div className="menu-item" onClick={() => logout()}>
+              <LogoutOutlined /> Logout
+            </div>
+            <div className="menu-item" onClick={toggle}>
+              {isDarkMode ? <LightModeOutlined /> : <BedtimeOutlined />} Light
+            </div>
           </div>
-        ) : (
-          <PersonOutlineOutlined />
         )}
       </div>
     </div>
