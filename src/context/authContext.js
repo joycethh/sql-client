@@ -20,10 +20,10 @@ export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    console.log("currentUser/user from localStorage: ", user);
+    const user = JSON.parse(localStorage.getItem("user")); //check if there is a user in the local storage
     if (user) {
       setCurrentUser(user);
+      localStorage.removeItem("user");
     } else {
       setLoading(false);
     }
@@ -38,7 +38,6 @@ export const AuthContextProvider = ({ children }) => {
           withCredentials: true,
         }
       );
-      console.log("Login response data:", response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
       setCurrentUser(response.data);
     } catch (error) {
@@ -63,25 +62,6 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.removeItem("user");
     setCurrentUser(null);
   };
-
-  // useEffect(() => {
-  //   localStorage.setItem("user", JSON.stringify(currentUser));
-  // }, [currentUser]);
-  // useEffect(() => {
-  //   const user = JSON.parse(localStorage.getItem("user"));
-  //   console.log("currentUser from localStorage: ", user);
-  //   if (user) {
-  //     setCurrentUser(user);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     localStorage.setItem("user", JSON.stringify(currentUser));
-  //   } else {
-  //     localStorage.removeItem("user");
-  //   }
-  // }, [currentUser]);
 
   return (
     <AuthContext.Provider
