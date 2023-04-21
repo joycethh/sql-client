@@ -32,8 +32,8 @@ const Navbar = () => {
           <BedtimeOutlined onClick={toggle} />
         )}
         <div className="search">
-          <SearchOutlined />
           <input type="text" placeholder="Search..." />
+          <SearchOutlined />
         </div>
       </div>
       <div className="right">
