@@ -15,15 +15,14 @@ const Login = () => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const { login } = useAuthContext();
-  // console.log("currentUser", currentUser);
+  const { loading, error, login } = useAuthContext();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       await login(input);
-      // console.log("currentUser after login:", currentUser);
+
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -50,11 +49,16 @@ const Login = () => {
               placeholder="Password"
               onChange={handleChange}
             />
-            {/* {err && (
-              <div className="error">
-                <p>{err}</p>
+            {loading && (
+              <div className="loading">
+                <p>Loading</p>
               </div>
-            )} */}
+            )}
+            {error && (
+              <div className="error">
+                <p>{error}</p>
+              </div>
+            )}
             <button onClick={handleLogin}>Submit</button>
           </form>
         </div>

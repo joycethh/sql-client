@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 const AuthContext = createContext();
-// export const useAuthContext = () => useContext(AuthContext);
+
 export const useAuthContext = () => {
   const authContext = useContext(AuthContext);
   if (!authContext) {
@@ -18,6 +18,7 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user")); //check if there is a user in the local storage
@@ -41,21 +42,25 @@ export const AuthContextProvider = ({ children }) => {
       localStorage.setItem("user", JSON.stringify(response.data));
       setCurrentUser(response.data);
     } catch (error) {
-      console.error(error);
+      setError(error.response.data);
     }
   };
 
   const register = async (input) => {
-    const response = await axios.post(
-      "http://localhost:8000/api/auth/register",
-      input,
-      {
-        withCredentials: true,
-      }
-    );
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/auth/register",
+        input,
+        {
+          withCredentials: true,
+        }
+      );
 
-    setCurrentUser(response.data);
-    localStorage.setItem("user", JSON.stringify(response.data));
+      setCurrentUser(response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
+    } catch (error) {
+      setError(error.response.data);
+    }
   };
 
   const logout = () => {
@@ -65,7 +70,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ currentUser, loading, login, register, logout }}
+      value={{ currentUser, loading, error, login, register, logout }}
     >
       {!loading && children}
     </AuthContext.Provider>

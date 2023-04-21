@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
+// import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import "./sidebar.scss";
 import { useAuthContext } from "../../context/authContext";
