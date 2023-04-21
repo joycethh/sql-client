@@ -15,7 +15,7 @@ export const useAuthContext = () => {
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem("user"))
+    JSON.parse(localStorage.getItem("user")) || null
   );
   const [loading, setLoading] = useState(true);
 
@@ -23,7 +23,7 @@ export const AuthContextProvider = ({ children }) => {
     const user = JSON.parse(localStorage.getItem("user")); //check if there is a user in the local storage
     if (user) {
       setCurrentUser(user);
-      localStorage.removeItem("user");
+      localStorage.removeItem("user"); //remove
     } else {
       setLoading(false);
     }
