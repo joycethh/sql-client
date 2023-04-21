@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   HomeOutlined,
@@ -12,11 +11,11 @@ import {
 } from "@mui/icons-material/";
 
 import "./navbar.scss";
-import { DarkModeContext } from "../../context/darkModeContext";
+import { useDarkModeContext } from "../../context/darkModeContext";
 import { useAuthContext } from "../../context/authContext";
 
 const Navbar = () => {
-  const { isDarkMode, toggle } = useContext(DarkModeContext);
+  const { isDarkMode, toggle } = useDarkModeContext();
   const { currentUser } = useAuthContext();
   return (
     <div className="navbar">
