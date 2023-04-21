@@ -6,7 +6,6 @@ import {
   SearchOutlined,
   PersonOutlineOutlined,
   LogoutOutlined,
-  // AddCircleOutlineOutlined,
 } from "@mui/icons-material/";
 
 import "./navbar.scss";
@@ -33,21 +32,20 @@ const Navbar = () => {
           <SearchOutlined />
         </div>
       </div>
-      <div className="dropdown-container">
-        <div className="right">
-          {/* <AddCircleOutlineOutlined /> */}
-          {currentUser ? (
-            <div className="user" onClick={toggleMenu}>
-              <img src={currentUser?.profilePic} alt="" />
-              <span>{currentUser?.name}</span>
-            </div>
-          ) : (
-            <PersonOutlineOutlined />
-          )}
-        </div>
+
+      <div className="right">
+        {currentUser ? (
+          <div className="user" onClick={toggleMenu}>
+            <img src={currentUser?.profilePic} alt="" />
+            <span>{currentUser?.name}</span>
+          </div>
+        ) : (
+          <PersonOutlineOutlined />
+        )}
 
         {isMenuOpen && (
           <div className="dropdown-menu">
+            <div className="speech-bubble"></div>
             <div className="menu-item" onClick={() => logout()}>
               <LogoutOutlined /> Logout
             </div>

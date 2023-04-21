@@ -62,11 +62,12 @@
         gap: 10px;
 
         .user{
+            position: relative;
             display: flex;
             align-items: center;
             gap: 5px;
             font-weight: 500;
-            cursor: pointer;
+            cursor: pointer;  
 
             img{
                 width: 30px;
@@ -78,23 +79,37 @@
             span {
                 text-transform: capitalize;
             }
-
-           
         }
-    }
-
-    .dropdown-container {
-        position: relative;
 
         .dropdown-menu {
             position: absolute;
-            top: 120%;
-            right: 0;
-            background-color: themed('bg');
+            top: 100%;
+            right: -10px;
+            background-color: themed("bgSoft");
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            min-width: 150px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             z-index: 1;
+            padding: 10px;
+            width: 200px;
+
+            .speech-bubble {
+                position: absolute;
+                top: -10px;
+                right: 50%;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 10px 10px;
+                border-color: themed('bgSoft') transparent;
+                // position: absolute;
+                // top: -10px;
+                // right: 20px;
+                // width: 20px;
+                // height: 20px;
+                // background-color: themed("bg");
+                // transform: rotate(45deg);
+                // z-index: -1;
+            }
 
             .menu-item {
                 padding: 10px;
@@ -105,10 +120,11 @@
                 transition: background-color 0.3s ease;
 
                 &:hover {
-                    background-color: themed('bgSoft');
+                    background-color: themed('border');
                 }
             }
         }
     }
+
 }
 }
