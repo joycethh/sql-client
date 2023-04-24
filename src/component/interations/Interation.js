@@ -6,26 +6,15 @@ import "./comments.scss";
 import moment from "moment";
 import { TextsmsOutlined } from "@mui/icons-material";
 
-const Comments = ({ postId, handleOpen, open }) => {
+const Interations = ({ postId, handleOpen, open }) => {
   const { currentUser } = useAuthContext();
   const [desc, setDesc] = useState("");
-  console.log("postId", postId);
 
   // Queries
-  // const { isLoading, error, data } = useQuery(["comments"], async () => {
-  //   const { data } = await API.get(`/comments?postId=${postId}`);
-  //   console.log("comment Data", data);
-  //   return data;
-  // });
-
-  const { isLoading, error, data } = useQuery(
-    ["comments", postId],
-    async () => {
-      const { data } = await API.get(`/comments?postId=${postId}`);
-      console.log("comment Data", data);
-      return data;
-    }
-  );
+  const { isLoading, error, data } = useQuery(["comments"], async () => {
+    const { data } = await API.get(`/comments?postId=${postId}`);
+    return data;
+  });
 
   const queryClient = useQueryClient();
 
@@ -86,4 +75,4 @@ const Comments = ({ postId, handleOpen, open }) => {
   );
 };
 
-export default Comments;
+export default Interations;
