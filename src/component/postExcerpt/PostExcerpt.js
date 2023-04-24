@@ -5,7 +5,6 @@ import Comments from "../comments/Comments";
 import "./postExcerpt.scss";
 import {
   MoreHoriz,
-  ShareOutlined,
   TextsmsOutlined,
   ThumbUpOutlined,
   ThumbUpAlt,
@@ -99,10 +98,10 @@ const PostExcerpt = ({ post }) => {
           <div className="item" onClick={() => setOpenComments(!openComments)}>
             <TextsmsOutlined />
           </div>
-          <div className="item">
+          {/* <div className="item">
             <ShareOutlined />
             Share
-          </div>
+          </div> */}
         </div>
         {openComments && <Comments postId={post.id} />}
       </div>
