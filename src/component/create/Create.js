@@ -47,7 +47,8 @@ const Create = () => {
     setFile(null);
   };
 
-  const clearImage = () => {
+  const clearImage = (e) => {
+    e.stopPropagation();
     setFile(null);
   };
 
@@ -68,7 +69,9 @@ const Create = () => {
             {file && (
               <div className="image-container">
                 <img className="file" alt="" src={URL.createObjectURL(file)} />
-                <button onClick={clearImage}>Delete</button>
+                <div onClick={clearImage} className="delete-icon-container ">
+                  <ClearOutlined />
+                </div>
               </div>
             )}
           </div>
@@ -114,16 +117,3 @@ const Create = () => {
 };
 
 export default Create;
-
-{
-  /* <div className="right">
-{file && (
-  <div className="image-container">
-    <img className="file" alt="" src={URL.createObjectURL(file)} />
-    <div className="delete-icon-container" onClick={clearImage}>
-      <ClearOutlined />
-    </div>
-  </div>
-)}
-</div> */
-}
