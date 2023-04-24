@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
-import {
-  FacebookTwoTone,
-  LinkedIn,
-  Twitter,
-  Language,
-  EmailOutlined,
-  PlaceOutlined,
-  MoreHoriz,
-} from "@mui/icons-material/";
+import { Language, PlaceOutlined } from "@mui/icons-material/";
 import "./profile.scss";
 import PostLists from "../../component/postLists/PostLists";
 

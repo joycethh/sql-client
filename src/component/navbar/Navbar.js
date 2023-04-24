@@ -50,7 +50,8 @@ const Navbar = () => {
               <LogoutOutlined /> Logout
             </div>
             <div className="menu-item" onClick={toggle}>
-              {isDarkMode ? <LightModeOutlined /> : <BedtimeOutlined />} Light
+              {isDarkMode ? <LightModeOutlined /> : <BedtimeOutlined />} Dark
+              Mode
             </div>
           </div>
         )}
