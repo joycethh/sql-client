@@ -4,28 +4,26 @@ import { API } from "../../axios";
 import { useAuthContext } from "../../context/authContext";
 import "./comments.scss";
 import moment from "moment";
+import { TextsmsOutlined } from "@mui/icons-material";
 
-const Comments = ({ postId }) => {
+const Comments = ({ postId, handleOpen, open }) => {
   const { currentUser } = useAuthContext();
   const [desc, setDesc] = useState("");
+
   // Queries
   const { isLoading, error, data } = useQuery(["comments"], async () => {
-    // const { data } = await API.get("/comments?postId=" + postId);
     const { data } = await API.get(`/comments?postId=${postId}`);
     return data;
   });
 
-  // Access the client
   const queryClient = useQueryClient();
 
-  // Mutations
   const mutation = useMutation(
     (newComment) => {
       return API.post(`/comments?postId=${postId}`, newComment);
     },
     {
       onSuccess: () => {
-        // Invalidate and refetch
         queryClient.invalidateQueries(["comments"]);
       },
     }
@@ -38,31 +36,41 @@ const Comments = ({ postId }) => {
   };
 
   if (isLoading) return "Loading...";
-
   if (error) return "An error has occurred: " + error.message;
+
   return (
-    <div className="comments">
-      <div className="write">
-        <img src={currentUser.profilePic} alt="" />
-        <input
-          type="text"
-          placeholder="write a comment"
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-        />
-        <button onClick={handleSubmit}>send</button>
+    <>
+      <div className="item" onClick={handleOpen}>
+        <TextsmsOutlined /> {data.length} comments
       </div>
-      {data.map((comment) => (
-        <div className="comment" key={comment.id}>
-          <img src={comment.profilePic} alt="" />
-          <div className="content">
-            <span>{comment.name}</span>
-            <p>{comment.desc}</p>
+
+      {open && (
+        <div className="comments">
+          <div className="write">
+            <img src={currentUser.profilePic} alt="" />
+            <input
+              type="text"
+              placeholder="write a comment"
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+            />
+            <button onClick={handleSubmit}>send</button>
           </div>
-          <span className="date">{moment(comment.createdAt).fromNow()}</span>
+          {data.map((comment) => (
+            <div className="comment" key={comment.id}>
+              <img src={comment.profilePic} alt="" />
+              <div className="content">
+                <span>{comment.name}</span>
+                <p>{comment.desc}</p>
+              </div>
+              <span className="date">
+                {moment(comment.createdAt).fromNow()}
+              </span>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 };
 

@@ -3,12 +3,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import Comments from "../comments/Comments";
 import "./postExcerpt.scss";
-import {
-  MoreHoriz,
-  TextsmsOutlined,
-  ThumbUpOutlined,
-  ThumbUpAlt,
-} from "@mui/icons-material";
+import { MoreHoriz, ThumbUpOutlined, ThumbUpAlt } from "@mui/icons-material";
 import { useAuthContext } from "../../context/authContext";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { API } from "../../axios";
@@ -95,15 +90,18 @@ const PostExcerpt = ({ post }) => {
             )}
             {data?.length} likes
           </div>
-          <div className="item" onClick={() => setOpenComments(!openComments)}>
-            <TextsmsOutlined />
-          </div>
+
           {/* <div className="item">
             <ShareOutlined />
             Share
           </div> */}
         </div>
-        {openComments && <Comments postId={post.id} />}
+
+        <Comments
+          postId={post.id}
+          open={openComments}
+          handleOpen={() => setOpenComments(!openComments)}
+        />
       </div>
     </div>
   );
