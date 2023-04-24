@@ -13,17 +13,16 @@ const Create = () => {
   const { currentUser } = useAuthContext();
   const [file, setFile] = useState(null);
   const [desc, setDesc] = useState("");
+  const [error, setError] = useState(null);
 
   const upload = async () => {
-    console.log("post-file", file);
     try {
       const formData = new FormData();
       formData.append("file", file);
       const response = await API.post("/upload", formData);
-      console.log("post-file-response", response);
       return response.data;
     } catch (err) {
-      console.log(err);
+      setError(err.response.data.message);
     }
   };
 
@@ -88,7 +87,7 @@ const Create = () => {
                 </span>
               </div>
             </label>
-            <div className="item">
+            {/* <div className="item">
               <img src="" alt="" />
               <span>
                 <AddLocationAltOutlined />
@@ -99,12 +98,13 @@ const Create = () => {
               <span>
                 <AlternateEmailOutlined />
               </span>
-            </div>
+            </div> */}
           </div>
           <div className="right">
             <button onClick={handleClick}>Share</button>
           </div>
         </div>
+        {error && <div className="error">{error}</div>}
       </div>
     </div>
   );
