@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import Comments from "../comments/Comments";
-import Likes from "../likes/Likes";
+import Interations from "../interations/Interation";
 import "./postExcerpt.scss";
 import { MoreHoriz } from "@mui/icons-material";
 import { useAuthContext } from "../../context/authContext";
@@ -56,9 +55,9 @@ const PostExcerpt = ({ post }) => {
           <p>{post.desc}</p>
           <img src={`/upload/${post?.image}`} alt="" />
         </div>
-        <Likes postId={post.id} currentUser={currentUser} />
-        <Comments
+        <Interations
           postId={post.id}
+          currentUser={currentUser}
           open={openComments}
           handleOpen={() => setOpenComments(!openComments)}
         />
