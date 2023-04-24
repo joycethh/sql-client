@@ -60,7 +60,7 @@ const Create = () => {
             <img src={currentUser?.profilePic} alt="" />
             <input
               type="text"
-              placeholder={`What's on your mind ${currentUser?.name}?`}
+              placeholder={`What's on your mind ?`}
               onChange={(e) => setDesc(e.target.value)}
               value={desc}
             />
