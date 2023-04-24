@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import {
-  ImageOutlined,
-  AddLocationAltOutlined,
-  AlternateEmailOutlined,
-} from "@mui/icons-material";
+import { ImageOutlined, ClearOutlined } from "@mui/icons-material";
 import { useAuthContext } from "../../context/authContext";
 import "./create.scss";
 import { API } from "../../axios";
@@ -51,6 +47,10 @@ const Create = () => {
     setFile(null);
   };
 
+  const clearImage = () => {
+    setFile(null);
+  };
+
   return (
     <div className="create">
       <div className="container">
@@ -66,7 +66,10 @@ const Create = () => {
           </div>
           <div className="right">
             {file && (
-              <img className="file" alt="" src={URL.createObjectURL(file)} />
+              <div className="image-container">
+                <img className="file" alt="" src={URL.createObjectURL(file)} />
+                <button onClick={clearImage}>Delete</button>
+              </div>
             )}
           </div>
         </div>
@@ -111,3 +114,16 @@ const Create = () => {
 };
 
 export default Create;
+
+{
+  /* <div className="right">
+{file && (
+  <div className="image-container">
+    <img className="file" alt="" src={URL.createObjectURL(file)} />
+    <div className="delete-icon-container" onClick={clearImage}>
+      <ClearOutlined />
+    </div>
+  </div>
+)}
+</div> */
+}
