@@ -9,15 +9,6 @@ import { TextsmsOutlined } from "@mui/icons-material";
 const Comments = ({ postId, handleOpen, open }) => {
   const { currentUser } = useAuthContext();
   const [desc, setDesc] = useState("");
-  console.log("postId", postId);
-
-  // Queries
-  // const { isLoading, error, data } = useQuery(["comments"], async () => {
-  //   const { data } = await API.get(`/comments?postId=${postId}`);
-  //   console.log("comment Data", data);
-  //   return data;
-  // });
-
   const { isLoading, error, data } = useQuery(
     ["comments", postId],
     async () => {
