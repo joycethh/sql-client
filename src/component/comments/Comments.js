@@ -40,36 +40,37 @@ const Comments = ({ postId, handleOpen, open }) => {
 
   return (
     <>
-      <div className="item" onClick={handleOpen}>
+      <div className="item-comments" onClick={handleOpen}>
         <TextsmsOutlined /> {data.length} comments
       </div>
-
-      {open && (
-        <div className="comments">
-          <div className="write">
-            <img src={currentUser.profilePic} alt="" />
-            <input
-              type="text"
-              placeholder="write a comment"
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)}
-            />
-            <button onClick={handleSubmit}>send</button>
-          </div>
-          {data.map((comment) => (
-            <div className="comment" key={comment.id}>
-              <img src={comment.profilePic} alt="" />
-              <div className="content">
-                <span>{comment.name}</span>
-                <p>{comment.desc}</p>
-              </div>
-              <span className="date">
-                {moment(comment.createdAt).fromNow()}
-              </span>
+      <div className="comments-container">
+        {open && (
+          <div className="comments">
+            <div className="write">
+              <img src={currentUser.profilePic} alt="" />
+              <input
+                type="text"
+                placeholder="write a comment"
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+              />
+              <button onClick={handleSubmit}>send</button>
             </div>
-          ))}
-        </div>
-      )}
+            {data.map((comment) => (
+              <div className="comment" key={comment.id}>
+                <img src={comment.profilePic} alt="" />
+                <div className="content">
+                  <span>{comment.name}</span>
+                  <p>{comment.desc}</p>
+                </div>
+                <span className="date">
+                  {moment(comment.createdAt).fromNow()}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 };

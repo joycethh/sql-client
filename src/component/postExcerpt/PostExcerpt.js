@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Comments from "../comments/Comments";
+import Likes from "../likes/Likes";
 import "./postExcerpt.scss";
-import { MoreHoriz, ThumbUpOutlined, ThumbUpAlt } from "@mui/icons-material";
+import { MoreHoriz } from "@mui/icons-material";
 import { useAuthContext } from "../../context/authContext";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { API } from "../../axios";
 
 const PostExcerpt = ({ post }) => {
@@ -13,38 +14,14 @@ const PostExcerpt = ({ post }) => {
   const [openComments, setOpenComments] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 
-  //like queries request
-  const { isLoading, data } = useQuery(["likes", post.id], async () => {
-    const response = await API.get("/likes?postId=" + post.id);
-    return response.data;
-  });
-
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(
-    (liked) => {
-      if (liked) return API.delete(`/likes?postId=${post.id}`);
-      return API.post(`/likes?postId=${post.id}`);
-    },
-
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["likes"]);
-      },
-    }
-  );
-  const handleLike = () => {
-    mutation.mutate(data?.includes(currentUser.id));
-  };
-
-  //delete mutation
   const deleteMutation = useMutation(
     (postId) => {
       return API.delete(`/posts/${post.id}`);
     },
     {
       onSuccess: () => {
-        // Invalidate and refetch
         queryClient.invalidateQueries(["posts"]);
       },
     }
@@ -79,24 +56,7 @@ const PostExcerpt = ({ post }) => {
           <p>{post.desc}</p>
           <img src={`/upload/${post?.image}`} alt="" />
         </div>
-        <div className="interations">
-          <div className="item">
-            {isLoading ? (
-              "Loading"
-            ) : data?.includes(currentUser.id) ? (
-              <ThumbUpAlt sx={{ color: "#5271ff" }} onClick={handleLike} />
-            ) : (
-              <ThumbUpOutlined onClick={handleLike} />
-            )}
-            {data?.length} likes
-          </div>
-
-          {/* <div className="item">
-            <ShareOutlined />
-            Share
-          </div> */}
-        </div>
-
+        <Likes postId={post.id} currentUser={currentUser} />
         <Comments
           postId={post.id}
           open={openComments}
