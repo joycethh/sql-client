@@ -46,7 +46,9 @@ const PostExcerpt = ({ post }) => {
               <span className="date">{moment(post.createdAt).fromNow()}</span>
             </div>
           </div>
-          <MoreHoriz onClick={() => setOpenMenu(!openMenu)} />
+          {currentUser.id === post.userId && (
+            <MoreHoriz onClick={() => setOpenMenu(!openMenu)} />
+          )}
           {openMenu && post.userId === currentUser.id && (
             <button onClick={handleDelete}> Delete </button>
           )}
