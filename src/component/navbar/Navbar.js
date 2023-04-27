@@ -9,6 +9,7 @@ import {
 } from "@mui/icons-material/";
 
 import "./navbar.scss";
+import Search from "../search/Search";
 import { useDarkModeContext } from "../../context/darkModeContext";
 import { useAuthContext } from "../../context/authContext";
 
@@ -27,10 +28,11 @@ const Navbar = () => {
           <span>Funget2</span>
         </Link>
 
-        <div className="search">
+        {/* <div className="search">
           <input type="text" placeholder="Search..." />
           <SearchOutlined />
-        </div>
+        </div> */}
+        {/* <Search /> */}
       </div>
 
       <div className="right">

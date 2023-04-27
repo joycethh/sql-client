@@ -48,7 +48,6 @@ const Interations = ({ postId, handleOpen, open, currentUser }) => {
     data: likesData,
   } = useQuery(["likes", postId, currentUser.id], async () => {
     const response = await API.get("/likes?postId=" + postId);
-    console.log("likes reponse", response);
     return response.data;
   });
   const likesMutation = useMutation(
