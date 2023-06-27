@@ -10,10 +10,6 @@
         border-radius: 5px;
         padding: 5px;
        
-
-        @include mobile {
-            display: none;
-        }
         form {
             display: flex;
             align-items: center;
@@ -41,7 +37,13 @@
 
     }
 }
-
+.search.isSearchExpanded {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
 
 .results-container {
     @include themify($themes) {
