@@ -15,7 +15,7 @@ const Search = () => {
     data: posts,
   } = useQuery(["searchPosts", query], async () => {
     const { data } = await API.get(
-      `/search/posts?q=${encodeURIComponent(query)}`
+      `/posts/search?query=${encodeURIComponent(query)}`
     );
     console.log("searchPosts-Data", data);
     return data;
@@ -26,17 +26,23 @@ const Search = () => {
     isLoading: isLoadingUsers,
     error: errorUsers,
     data: users,
-  } = useQuery(["searchUsers", query], async () => {
-    const { data } = await API.get(
-      `/search/users?q=${encodeURIComponent(query)}`
-    );
-    console.log("searchPosts-Data", data);
-    return data;
-  });
+  } = useQuery(
+    ["searchUsers", query],
+    async () => {
+      const { data } = await API.get(
+        `/search/users?q=${encodeURIComponent(query)}`
+      );
+      console.log("searchPosts-Data", data);
+      return data;
+    },
+    { enabled: query.trim() !== "" }
+  );
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate(`/search?q=${encodeURIComponent(query)}`);
+    if (query.trim() !== "") {
+      navigate(`/search?q=${encodeURIComponent(query)}`);
+    }
   };
   return (
     <>
