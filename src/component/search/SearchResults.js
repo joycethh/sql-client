@@ -18,12 +18,16 @@ const SearchResults = () => {
     ["searchPosts", query],
     async () => {
       const { data } = await API.get(
-        `/posts/search?query=${encodeURIComponent(query)}`
+        `/posts/search/posts?query=${encodeURIComponent(query)}`
       );
-      console.log("searchPosts-Data", data);
       return data;
     },
-    { enabled: query.trim() !== "" }
+    {
+      enabled: query.trim() !== "",
+      onError: (error) => {
+        console.error("searchPosts Error ---", error);
+      },
+    }
   );
 
   //search query for users
