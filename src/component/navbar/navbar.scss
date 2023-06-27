@@ -24,36 +24,6 @@
             font-size: 20px;
             color: themed('logo')
         }
-
-        .search{
-            display: flex;
-            align-items: center;
-            border: 1px solid themed('border');
-            gap: 10px;
-            border-radius: 5px;
-            padding: 5px;
-
-            @include mobile {
-                display: none;
-            }
-            input{
-                border: 0;
-                outline: none;
-                width: 500px;
-                background-color: transparent;
-                color: themed('textColor');
-
-                @include mobile{
-                    display: none;
-                }
-
-                @include tablet{
-                    width: 200px;
-                }
-            
-            }
-        }
-
     }
 
     .right{

@@ -1,0 +1,55 @@
+
+@import "../../style.scss";
+
+.search{
+    @include themify($themes) {
+        display: flex;
+        align-items: center;
+        border: 1px solid themed('border');
+        gap: 10px;
+        border-radius: 5px;
+        padding: 5px;
+       
+
+        @include mobile {
+            display: none;
+        }
+        form {
+            display: flex;
+            align-items: center;
+
+            input{
+                border: 0;
+                outline: none;
+                width: 500px;
+                background-color: transparent;
+                color: themed('textColor');
+    
+                @include mobile{
+                    display: none;
+                }
+    
+                @include tablet{
+                    width: 200px;
+                }
+            }
+  
+        }
+
+    }
+}
+
+
+.results-container {
+    @include themify($themes) {
+    flex: 6;
+    padding: 20px;
+    background-color: themed('bgSoft');
+    color: themed('textColor');
+
+        @include mobile{
+            padding: 10px;
+        }
+
+    }
+}
