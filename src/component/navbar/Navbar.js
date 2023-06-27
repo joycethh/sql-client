@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import {
   BedtimeOutlined,
   LightModeOutlined,
-  SearchOutlined,
   PersonOutlineOutlined,
   LogoutOutlined,
 } from "@mui/icons-material/";
@@ -27,12 +26,7 @@ const Navbar = () => {
         <Link to="/" style={{ textDecoration: "none" }}>
           <span>Funget2</span>
         </Link>
-
-        {/* <div className="search">
-          <input type="text" placeholder="Search..." />
-          <SearchOutlined />
-        </div> */}
-        {/* <Search /> */}
+        <Search />
       </div>
 
       <div className="right">
