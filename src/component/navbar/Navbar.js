@@ -30,10 +30,11 @@ const Navbar = () => {
             <Link to="/" style={{ textDecoration: "none" }}>
               <span>Funget2</span>
             </Link>
+            <div className="search-box">
+              <Search />
+            </div>
           </div>
-          <div className="middle-bottom">
-            <Search />
-          </div>
+
           <div className="right">
             {currentUser ? (
               <div className="user" onClick={toggleMenu}>

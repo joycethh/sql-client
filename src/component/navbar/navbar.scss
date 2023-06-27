@@ -19,38 +19,39 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            position: relative;
 
             .left{
                 display: flex;
                 align-items: center;
-                gap: 20px;
+                gap: 40px;
                 
                 span{
                     font-weight: bold;
                     font-size: 20px;
-                    color: themed('logo')
+                    color: themed('logo');
+                    padding: 5px 0;
+                }
+
+                .search-box{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 60%;
+                    overflow: hidden;
+    
+                    @include mobile {
+                        display: none;
+                    }
                 }
             }
 
-            .middle-bottom {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 60%;
-                overflow: hidden;
-
-                @include mobile {
-                    display: none;
-                }
-            }
-        
             .right{
                 display: flex;
                 align-items: center;
                 gap: 10px;
         
                 .user{
+                    padding: 5px 0;
                     position: relative;
                     display: flex;
                     align-items: center;
@@ -114,11 +115,7 @@
 .navbar-bottom-mobile {
     display: none;
     @include themify($themes) {
-        // position: absolute;
-        // top: calc(100% + 10px);
-        // margin-top: 15px;
-        // width: 100%;
-        padding: 5px 20px;
+        padding: 5px 18px;
         background-color: themed("bgSoft");
         border-bottom: 1px solid themed('border');
         
