@@ -8,6 +8,8 @@ const SearchResults = () => {
   const location = useLocation();
   const query = new URLSearchParams(location.search).get("q");
   console.log("query", query);
+
+  //search query for posts
   const {
     isLoading,
     error,
@@ -23,6 +25,23 @@ const SearchResults = () => {
     },
     { enabled: query.trim() !== "" }
   );
+
+  //search query for users
+  // const {
+  //   isLoading: isLoadingUsers,
+  //   error: errorUsers,
+  //   data: users,
+  // } = useQuery(
+  //   ["searchUsers", query],
+  //   async () => {
+  //     const { data } = await API.get(
+  //       `/search/users?q=${encodeURIComponent(query)}`
+  //     );
+  //     console.log("searchPosts-Data", data);
+  //     return data;
+  //   },
+  //   { enabled: query.trim() !== "" }
+  // );
   return (
     <div className="results-container">
       {error ? (
