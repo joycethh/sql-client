@@ -8,29 +8,21 @@
         border: 1px solid themed('border');
         gap: 10px;
         border-radius: 5px;
-        padding: 5px;
+        overflow: hidden;
        
         form {
             display: flex;
             align-items: center;
+            width: 100%;
 
             input{
                 border: 0;
                 outline: none;
-                width: 500px;
+                width: 100%;
                 background-color: themed('bg'); 
                 color: themed('textColor');
                 padding: 5px;
                 margin-right: 10px;
-        
-    
-                @include mobile{
-                    display: none;
-                }
-    
-                @include tablet{
-                    width: 200px;
-                }
             }
   
         }

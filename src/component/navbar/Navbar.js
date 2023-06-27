@@ -59,6 +59,9 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <div className="navbar-bottom-mobile">
+        <Search />
+      </div>
     </>
   );
 };
