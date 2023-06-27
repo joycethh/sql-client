@@ -13,30 +13,34 @@ const Search = () => {
     isLoading,
     error,
     data: posts,
-  } = useQuery(["searchPosts", query], async () => {
-    const { data } = await API.get(
-      `/posts/search?query=${encodeURIComponent(query)}`
-    );
-    console.log("searchPosts-Data", data);
-    return data;
-  });
-
-  //search query for users
-  const {
-    isLoading: isLoadingUsers,
-    error: errorUsers,
-    data: users,
   } = useQuery(
-    ["searchUsers", query],
+    ["searchPosts", query],
     async () => {
       const { data } = await API.get(
-        `/search/users?q=${encodeURIComponent(query)}`
+        `/posts/search?query=${encodeURIComponent(query)}`
       );
       console.log("searchPosts-Data", data);
       return data;
     },
     { enabled: query.trim() !== "" }
   );
+
+  //search query for users
+  // const {
+  //   isLoading: isLoadingUsers,
+  //   error: errorUsers,
+  //   data: users,
+  // } = useQuery(
+  //   ["searchUsers", query],
+  //   async () => {
+  //     const { data } = await API.get(
+  //       `/search/users?q=${encodeURIComponent(query)}`
+  //     );
+  //     console.log("searchPosts-Data", data);
+  //     return data;
+  //   },
+  //   { enabled: query.trim() !== "" }
+  // );
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -56,20 +60,20 @@ const Search = () => {
         <SearchOutlined onClick={handleSearch} />
       </div>
       <div className="result">
-        {error || errorUsers ? (
-          <div className="error">{error || errorUsers}</div>
-        ) : isLoading || isLoadingUsers ? (
+        {error ? (
+          <div className="error">{error}</div>
+        ) : isLoading ? (
           <div className="loading">Loading</div>
         ) : (
           <>
-            <div className="users-result">
+            {/* <div className="users-result">
               {users?.map((user) => (
                 <div className="user">
                   <img src={user.profilePic} alt="" />
                   <span>{user.name}</span>
                 </div>
               ))}
-            </div>
+            </div> */}
             <div className="posts-result">
               {posts?.map((post) => (
                 <PostExcerpt post={post} key={post.id} />
