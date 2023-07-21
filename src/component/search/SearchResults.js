@@ -1,8 +1,9 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import PostExcerpt from "../postExcerpt/PostExcerpt";
 import { API } from "../../axios";
+import Profile from "../../pages/profile/Profile";
 import "./search.scss";
 const SearchResults = () => {
   const location = useLocation();
@@ -40,7 +41,7 @@ const SearchResults = () => {
     ["searchUsers", query],
     async () => {
       const { data } = await API.get(
-        `users/search/users?q=${encodeURIComponent(query)}`
+        `users/search/users?query=${encodeURIComponent(query)}`
       );
       console.log("searchUser-Data", data);
       return data;
@@ -56,14 +57,16 @@ const SearchResults = () => {
       ) : (
         <>
           <div className="users-result">
+            <span>Users that contains"{query}"</span>
             {users?.map((user) => (
               <div className="user">
                 <img src={user.profilePic} alt="" />
-                <span>{user.name}</span>
+                <Link to={`/profile/${user.id}`}>{user.name}</Link>
               </div>
             ))}
           </div>
           <div className="posts-result">
+            <span>Posts that contains"{query}"</span>
             {posts?.map((post) => (
               <PostExcerpt post={post} key={post.id} />
             ))}
