@@ -3,7 +3,6 @@ import { useLocation, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import PostExcerpt from "../postExcerpt/PostExcerpt";
 import { API } from "../../axios";
-import Profile from "../../pages/profile/Profile";
 import "./search.scss";
 const SearchResults = () => {
   const location = useLocation();
